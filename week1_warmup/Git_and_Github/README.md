@@ -69,7 +69,7 @@ Note: There are plenty of resources available online for more detailed reading. 
     - Do add, commit and push on your repository.
     
     - Push your solutions onto your repo periodically.
-
+    Ans: I have made the git repo on my own github and named it iitb_bootcamp_my_submission however, i am making the solutions in the same readme file as the ones you have made annd answering them in it as it seems more easier of a way to look at questions and solutions and didnt need to replicate the samething. 
 2. **Do you want to fix a bug?**
 
     - Fork [this](https://github.com/rajagond/git_assignment) repository. This will create a copy of repository on your account. <br>
