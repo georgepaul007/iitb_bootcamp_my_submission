@@ -1,6 +1,6 @@
 
 CC = g++ -Wno-write-strings
-SERVER_FILE = simple_server.cpp
+SERVER_FILE = simple_server.c
 HTTP_SERVER_FILE = http_server.cpp
 
 all: server

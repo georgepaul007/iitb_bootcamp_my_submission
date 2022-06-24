@@ -1,0 +1,37 @@
++r
+Starting program: /home/george/Documents/bootcamp/week1_warmup/Debugging_with_GDB/a.out 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffdfd8) at fibbonaci.cpp:11
+11	  cout << second_last << endl << last << endl;
++next
+
+Breakpoint 2, main (argc=1, argv=0x7fffffffdfd8) at fibbonaci.cpp:13
+13	  for(int i=1; i<=10; i++) {
++next
+14	    int next = second_last + last;
++next
+15	    last = next;
++next
+16	    second_last = last;
++next
+
+Breakpoint 3, main (argc=1, argv=0x7fffffffdfd8) at fibbonaci.cpp:17
+17	    cout << next << endl;
++next
+13	  for(int i=1; i<=10; i++) {
++next
+14	    int next = second_last + last;
++next
+15	    last = next;
++next
+16	    second_last = last;
++next
+
+Breakpoint 3, main (argc=1, argv=0x7fffffffdfd8) at fibbonaci.cpp:17
+17	    cout << next << endl;
++next
+13	  for(int i=1; i<=10; i++) {
++next
+14	    int next = second_last + last;

@@ -1,25 +1,54 @@
 /* run using ./server <port> */
-
+#include "http_server.hh"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
 #include <netinet/in.h>
 
 #include <pthread.h>
-
 void error(char *msg) {
   perror(msg);
   exit(1);
 }
+void *mySockFunc(void *arg) {
+  int n;
+  int newsockfd = *(int *)arg;
+  char buffer[256];
+   if (newsockfd < 0)
+    error("ERROR on accept");
+
+  /* read message from client */
+  while(1){
+    bzero(buffer, 256);
+    n = read(newsockfd, buffer, 255);
+    if (n < 0)
+      error("ERROR reading from socket");
+    // printf(buffer);
+    if(buffer == "quit") {
+      close(newsockfd);
+      break;
+    }
+    // HTTP_Response res(handle_request(buffer));
+    /* send reply to client */
+    // res = handle_request(buffer);
+    HTTP_Response res;
+    res.handle_request(buffer);
+    buffer = res.get_string();
+    n = write(newsockfd, buffer, 18);
+    if (n < 0)
+      error("ERROR writing to socket");
+  }
+  return 0;
+}
+
+
 
 int main(int argc, char *argv[]) {
   int sockfd, newsockfd, portno;
   socklen_t clilen;
-  char buffer[256];
+  
   struct sockaddr_in serv_addr, cli_addr;
-  int n;
 
   if (argc < 2) {
     fprintf(stderr, "ERROR, no port provided\n");
@@ -50,26 +79,13 @@ int main(int argc, char *argv[]) {
 
   listen(sockfd, 5);
   clilen = sizeof(cli_addr);
-
+  pthread_t tid[10];
+  int i = 0;
   /* accept a new request, create a newsockfd */
-
-  newsockfd = accept(sockfd, (struct sockaddr *)&cli_addr, &clilen);
-  if (newsockfd < 0)
-    error("ERROR on accept");
-
-  /* read message from client */
-
-  bzero(buffer, 256);
-  n = read(newsockfd, buffer, 255);
-  if (n < 0)
-    error("ERROR reading from socket");
-  printf("Here is the message: %s", buffer);
-
-  /* send reply to client */
-
-  n = write(newsockfd, "I got your message", 18);
-  if (n < 0)
-    error("ERROR writing to socket");
+  while(1) {
+    newsockfd = accept(sockfd, (struct sockaddr *)&cli_addr, &clilen);
+    pthread_create(&tid[i++],NULL, mySockFunc, &newsockfd);
+  }
 
   return 0;
 }

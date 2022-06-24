@@ -25,9 +25,8 @@ struct HTTP_Response {
   string content_length;
 
   string body;
-
+  string connection;
   // TODO : Add more fields if and when needed
-
   string get_string(); // Returns the string representation of the HTTP Response
 };
 

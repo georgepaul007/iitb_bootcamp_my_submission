@@ -12,9 +12,11 @@ int main(int argc, char* argv[]) {
 
   for(int i=1; i<=10; i++) {
     int next = second_last + last;
-    cout << next << endl;
-    last = next;
     second_last = last;
+    last = next;
+
+    cout << next << endl;
+
   }
 
   return 0;
