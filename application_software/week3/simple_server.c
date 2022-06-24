@@ -33,8 +33,9 @@ void *mySockFunc(void *arg) {
     /* send reply to client */
     // res = handle_request(buffer);
     HTTP_Response res;
-    res.handle_request(buffer);
-    buffer = res.get_string();
+    res = *handle_request(buffer);
+    string s = res.get_string();
+    cout<<s;
     n = write(newsockfd, buffer, 18);
     if (n < 0)
       error("ERROR writing to socket");

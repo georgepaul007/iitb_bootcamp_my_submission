@@ -40,9 +40,11 @@ Following are some basic Linux commands. To know more about them use: <code> man
 1. Find the variant of the <code>ls</code> command (i.e. argument(s) to be used) to list contents of a folder including its hidden files, the variant of <code>cp</code> to copy folder and the command to rename a file.
 
 A) The variant of ls to list all the contents along with the hidden files (files started with .) is the "ls -a". 
+
 B) The variant of cp to copy entire folders is the cp -R [source-path] [destination-path], where the R stands for recursively. So, in short it means recursively copy everything from the source path and paste it in the destination path. 
+
 C) renaming a file can be done with the help of the move command (mv). we just move the file to the same location with a different name. 
-mv -sourcefile_name- -destinationfile_name-
+mv -sourcefile_name- -destinationfile_name-.
 
 2. In this question, we will understand the hardware configuration of your working machine using the <code>/proc</code> filesystem.
 
