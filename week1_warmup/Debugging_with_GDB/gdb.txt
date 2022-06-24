@@ -1,0 +1,173 @@
++next
+The program is not being run.
++I
+Undefined command: "I".  Try "help".
+----- Backtrace -----
+Backtrace unavailable
+---------------------
++l
+
+
+/build/gdb-wIRHdd/gdb-12.0.90/gdb/linespec.c:2455: internal-error: parse_linespec: Assertion `arg != nullptr' failed.
+A problem internal to GDB has been detected,
+further debugging may prove unreliable.
+
+This is a bug, please report it.  For instructions, see:
+<https://www.gnu.org/software/gdb/bugs/>.
+
+Command aborted.
++l
+1	#include<iostream>
+2	using namespace std;
+3	
+4	int main(int argc, char* argv[]) {
+5	
+6	  int a = 45; int b = 22;
+7	  int *p = &a;
+8	  int *q = NULL;
+9	
+10	  cout << *p << endl;
++next
+The program is not being run.
++run
+Starting program: /home/george/Documents/bootcamp/week1_warmup/Debugging_with_GDB/a.out 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Program received signal SIGSEGV, Segmentation fault.
+0x000055555555523e in main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:13
+13	  cout << *p << endl;
++next
+
+Program terminated with signal SIGSEGV, Segmentation fault.
+The program no longer exists.
++l 1
+1	#include<iostream>
+2	using namespace std;
+3	
+4	int main(int argc, char* argv[]) {
+5	
+6	  int a = 45; int b = 22;
+7	  int *p = &a;
+8	  int *q = NULL;
+9	
+10	  cout << *p << endl;
++l 2
+1	#include<iostream>
+2	using namespace std;
+3	
+4	int main(int argc, char* argv[]) {
+5	
+6	  int a = 45; int b = 22;
+7	  int *p = &a;
+8	  int *q = NULL;
+9	
+10	  cout << *p << endl;
++l3
+Undefined command: "l3".  Try "help".
++l main
+1	#include<iostream>
+2	using namespace std;
+3	
+4	int main(int argc, char* argv[]) {
+5	
+6	  int a = 45; int b = 22;
+7	  int *p = &a;
+8	  int *q = NULL;
+9	
+10	  cout << *p << endl;
++r
+Starting program: /home/george/Documents/bootcamp/week1_warmup/Debugging_with_GDB/a.out 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Program received signal SIGSEGV, Segmentation fault.
+0x000055555555523e in main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:13
+13	  cout << *p << endl;
++break 1
+Breakpoint 1 at 0x5555555551dc: file pointers.cpp, line 4.
++l
+8	  int *q = NULL;
+9	
+10	  cout << *p << endl;
+11	
+12	  p = q;
+13	  cout << *p << endl;
+14	
+15	  p = &b;
+16	  cout << *p << endl;
+17	
++l
+18	  return 0;
+19	}
++l
+Line number 20 out of range; pointers.cpp has 19 lines.
++help
+List of classes of commands:
+
+aliases -- User-defined aliases of other commands.
+breakpoints -- Making program stop at certain points.
+data -- Examining data.
+files -- Specifying and examining files.
+internals -- Maintenance commands.
+obscure -- Obscure features.
+running -- Running the program.
+stack -- Examining the stack.
+status -- Status inquiries.
+support -- Support facilities.
+text-user-interface -- TUI is the GDB text based interface.
+tracepoints -- Tracing of program execution without stopping the program.
+user-defined -- User-defined commands.
+
+Type "help" followed by a class name for a list of commands in that class.
+Type "help all" for the list of all commands.
+Type "help" followed by command name for full documentation.
+Type "apropos word" to search for commands related to "word".
+Type "apropos -v word" for full documentation of commands related to "word".
+Command name abbreviations are allowed if unambiguous.
++break 2
+Note: breakpoint 1 also set at pc 0x5555555551dc.
+Breakpoint 2 at 0x5555555551dc: file pointers.cpp, line 4.
++break 3
+Note: breakpoints 1 and 2 also set at pc 0x5555555551dc.
+Breakpoint 3 at 0x5555555551dc: file pointers.cpp, line 4.
++break 3
+Note: breakpoints 1, 2 and 3 also set at pc 0x5555555551dc.
+Breakpoint 4 at 0x5555555551dc: file pointers.cpp, line 4.
++break 10
+Breakpoint 5 at 0x555555555209: file pointers.cpp, line 10.
++break 8
+Breakpoint 6 at 0x555555555201: file pointers.cpp, line 8.
++r
+Starting program: /home/george/Documents/bootcamp/week1_warmup/Debugging_with_GDB/a.out 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:4
+4	int main(int argc, char* argv[]) {
++r
+Starting program: /home/george/Documents/bootcamp/week1_warmup/Debugging_with_GDB/a.out 
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+
+Breakpoint 1, main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:4
+4	int main(int argc, char* argv[]) {
++r
+Program not restarted.
++continue
+Continuing.
+
+Breakpoint 6, main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:8
+8	  int *q = NULL;
++continue
+Continuing.
+
+Breakpoint 5, main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:10
+10	  cout << *p << endl;
++continue
+Continuing.
+
+Program received signal SIGSEGV, Segmentation fault.
+0x000055555555523e in main (argc=1, argv=0x7fffffffdfa8) at pointers.cpp:13
+13	  cout << *p << endl;
++exit

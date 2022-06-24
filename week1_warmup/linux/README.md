@@ -142,9 +142,9 @@ pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp
  pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c 
 rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowpref
 
-A) in proc/cpuinfo the processor number relates the processor which is being run at the moment, the virtual or logical number given to that processor, in my case it is 0. Cores refers to the amount of cores or processing units present within the processor. This means that the processor can perform 4 actions in each of the cores simultaneous. 
+A) in proc/cpuinfo the processor number relates the processor which is being run at the moment, the virtual or logical number given to that processor(if you have multiple, it will display all of them), in my case it is 0 (because i have only 1 processor). Cores refers to the amount of cores or processing units present within the processor. This means that the processor can perform 4 actions in each of the cores simultaneous. 
 
-B) My pc has 1 socket for the CPU, which contains 4 cores each and 8 processors with a logical ID of 0 through 7.
+B) My pc has 1 socket for the CPU, which contains 4 cores and each having 2 threads and hence 8 CPU units with a logical ID of 0 through 7.
 
 C) The frequency of my cpu ranges from 1400-2100 based on the requirements. 
 

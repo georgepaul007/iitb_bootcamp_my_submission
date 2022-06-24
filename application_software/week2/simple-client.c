@@ -50,24 +50,27 @@ int main(int argc, char *argv[]) {
     error("ERROR connecting");
 
   /* ask user for input */
+  while(1){
+    printf("Please enter the message: ");
+    bzero(buffer, 256);
+    fgets(buffer, 255, stdin);
 
-  printf("Please enter the message: ");
-  bzero(buffer, 256);
-  fgets(buffer, 255, stdin);
-
-  /* send user message to server */
-
-  n = write(sockfd, buffer, strlen(buffer));
-  if (n < 0)
-    error("ERROR writing to socket");
-  bzero(buffer, 256);
+    /* send user message to server */
+    if(buffer == "quit") {
+      close(sockfd);
+      break;
+    }
+    n = write(sockfd, buffer, strlen(buffer));
+    if (n < 0)
+      error("ERROR writing to socket");
+    bzero(buffer, 256);
 
   /* read reply from server */
 
-  n = read(sockfd, buffer, 255);
-  if (n < 0)
-    error("ERROR reading from socket");
-  printf("Server response: %s\n", buffer);
-
+    n = read(sockfd, buffer, 255);
+    if (n < 0)
+      error("ERROR reading from socket");
+    printf("%s", buffer);
+  }
   return 0;
 }
